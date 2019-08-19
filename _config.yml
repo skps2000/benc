@@ -27,7 +27,7 @@ theme: plainwhite
 # theme: minima
 plugins:
   - jekyll-feed
-# remote_theme: thelehhman/plainwhite-jekyll
+remote_theme: thelehhman/plainwhite-jekyll
 plainwhite:
   name: Ben Cho
   tagline: Developer. 
