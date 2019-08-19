@@ -18,7 +18,7 @@ plainwhite:
 
   # generate social links in footer
   social_links:
-    twitter: skps2000
+    # twitter: skps2000
     github:  skps2000
     linkedIn: in/SEUNGKYU CHO
     rss: rss
@@ -51,5 +51,5 @@ plainwhite:
 remote_theme: thelehhman/plainwhite-jekyll
 
 plugins:
-   - jekyll-seo-tag
+  #  - jekyll-seo-tag
 #  - jekyll-feed
