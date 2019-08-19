@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Javascript Closure"
+title:  "[Javascript] Closure"
 date:   2019-08-19 21:52:00
 categories: javascript closure functional
 ---
