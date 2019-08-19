@@ -20,3 +20,15 @@ function getClosure() {
 var closure = getClosure();
 console.log(closure()); // 'variable 1'
 {% endhighlight %}
+```
+function getClosure() {
+  var text = 'variable 1';
+  return function() {
+    return text;
+  };
+}
+
+var closure = getClosure();
+console.log(closure()); // 'variable 1'
+```
+
