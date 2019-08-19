@@ -20,7 +20,8 @@ function getClosure() {
 var closure = getClosure();
 console.log(closure()); // 'variable 1'
 {% endhighlight %}
-```
+
+```javascript
 function getClosure() {
   var text = 'variable 1';
   return function() {
