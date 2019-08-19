@@ -9,18 +9,6 @@ Javascript Closure는 독립적인 (자유) 변수를 가리키는 함수이다.
 
 소스를 먼저 보자.
 
-{% highlight ruby %}
-function getClosure() {
-  var text = 'variable 1';
-  return function() {
-    return text;
-  };
-}
-
-var closure = getClosure();
-console.log(closure()); // 'variable 1'
-{% endhighlight %}
-
 ```javascript
 function getClosure() {
   var text = 'variable 1';
