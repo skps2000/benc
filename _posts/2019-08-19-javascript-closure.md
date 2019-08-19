@@ -5,9 +5,13 @@ date:   2019-08-19 21:52:00
 categories: javascript closure functional
 ---
 
-Javascript Closure는 독립적인 (자유) 변수를 가리키는 함수이다. 또는, 클로저 안에 정의된 함수는 만들어진 환경을 ‘기억한다’.
+Javascript Closure는 독립적인 (자유) 변수를 가리키는 함수이다. 
 
-소스를 먼저 보자.
+또, 클로저 안에 정의된 함수는 만들어진 환경을 ‘기억한다’.
+
+이게 무슨말일까? 항상 느끼지만 공식 레퍼런스를 참고하다 보면 상당히 추상적인 표현이 많다는걸 알게된다. 
+
+소스를 통해 이해해 보자.
 
 ```javascript
 function getClosure() {
@@ -20,7 +24,14 @@ function getClosure() {
 var closure = getClosure();
 console.log(closure()); // 'variable 1'
 ```
-출력된 결과를 보면 text 변수가 동적으로 변화하고 있는 것처럼 보인다. 실제로는 text라는 변수 자체가 여러 번 생성된 것이다. 즉, hello1()과 hello2(), hello3()은 서로 다른 환경을 가지고 있다.
+
+getClosure 라는 함수가 먼저 선언이 되었고 그 함수는 text를 리턴하는 함수를 리턴한다.
+
+리턴되어진 함수를 실행해 보면 getClosure 안의 지역변수의 값을 반환하고 있다.
+
+> 여기서 Javascript Closure에 대해 생각해 보자면 GC 대상이 되었어야 할 사용이 끝난 변수(text) 또는 컨텍스트에 대해 참조 경로(function)를 생성하고 반환함으로써 함수 내의 환경에 접근가능한 방법을 제공한다.
+
+아래에서 조금 더 살펴보자.
 
 ### 클로저를 통한 은닉화
 
@@ -45,9 +56,14 @@ hello3.say(); // 'Hello, 유근'
 hello1._name = 'anonymous';
 hello1.say(); // 'Hello, anonymous'
 ```
-위에서 Hello()로 생성된 객체들은 모두 _name이라는 변수를 가지게 된다. 변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 JavaScript 네이밍 컨벤션을 생각해 봤을때 이 변수는 Private variable으로 쓰고싶다는 의도를 알 수 있다. 하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.
+위에서 Hello()로 생성된 객체들은 모두 _name이라는 변수를 가지게 된다. 
+
+변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 JavaScript 네이밍 컨벤션을 생각해 봤을때 이 변수는 Private variable으로 쓰고싶다는 의도를 알 수 있다. 
+
+하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.
 
 이 경우에 클로저를 사용하여 외부에서 변수에 직접 접근하는 것을 제한할 수 있다.
+
 ```javascript
 function hello(name) {
   var _name = name;
