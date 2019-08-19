@@ -18,12 +18,12 @@ plainwhite:
 
   # generate social links in footer
   social_links:
-    # twitter: skps2000
+    #twitter: skps2000
     github:  skps2000
-    linkedIn: in/SEUNGKYU CHO
-    rss: rss
+    #linkedIn: in/SEUNGKYU CHO
+    #rss: rss
     # dribbble: jekyll
-    # facebook: jekyll
+    facebook: skps2000
     # flickr:   jekyll
     # instagram: jekyll
     # linkedin: jekyll
