@@ -1,5 +1,5 @@
 ---
-title: This is Post
+title: This is First Post(Temp)
 layout: post
 ---
 
