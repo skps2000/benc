@@ -1,6 +1,9 @@
 ---
 title: This is First Post(인삿말)
 layout: post
+date:   2019-08-15 21:52:00
+categories: hello world
+
 ---
 
 ### 안녕하세요. 
