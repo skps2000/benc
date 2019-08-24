@@ -29,14 +29,11 @@ var closure = fnClosure();
 console.log(closure()); // 'variable 1'
 ```
 
- - fnClosure라는 함수가 먼저 선언이 되었고 그 함수는 text를 리턴하는 함수를 리턴한다. 
--  리턴되어진 함수를 실행해 보면 fnClosure안의 지역변수의 값을 반환하고 있다.
-
-- 여기서 Javascript Closure에 대해 생각해 보자면 GC 대상이 되었어야 할 사용이 끝난 변수(text) 또는 컨텍스트에 대해 참조 경로(function)를 생성하고 반환함으로써 함수 내의 환경에 접근가능한 방법을 제공한다.
+fnClosure라는 함수가 먼저 선언이 되었고 그 함수는 varText1 를 리턴하는 함수를 리턴합니다.  리턴되어진 함수를 실행해 보면 fnClosure안의 지역변수의 값을 반환하고 있습니다. 여기서 Javascript Closure는 무엇인가에 대하여 생각해 보자면 ***GC 대상이 되었어야 할 사용이 끝난 변수(text) 또는 컨텍스트에 대해 참조 경로(function)를 생성하고 반환함으로써 함수 내의 환경에 접근가능한 방법을 제공하는 함수***  라고 보여집니다. 아직은 조금 애매모호 하기 때문에 다음 항목에서 조금 더 이해를 해봅시다.
 
 ### 클로저를 통한 은닉화
 
-클로저를 통한 은닉화라 함은 Private variables에 대한 접근 권한 문제이다. 예제 코드를 보자.
+클로저를 통한 은닉화라 함은 Private variables에 대한 접근 권한 문제입니다. 코드부터 보죠.
 
 ```javascript
 function Student(name) {
