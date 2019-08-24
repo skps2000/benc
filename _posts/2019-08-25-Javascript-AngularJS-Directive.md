@@ -38,11 +38,13 @@ myModule.directive('directiveName', function (injectables) {
 예제코드 내에서는 Angular 모듈 내에서 directive를 생성하는 함수를 호출합니다. 생성하려고 하는 directive 명은 "directiveName" 이며, 다음 함수 인자값에 directive가 무엇을 수행할 것이느냐에 대한 정의 함수를 확인할 수 있습니다. 이 함수에 정의된 directive의 기능을 확인해 보도록 하겠습니다.
 
 1. restict : HTML에서 디렉티브를 사용하기 위한 DOM  속성 네이밍 설정입니다.
+
 ```html
 <!-- restrict 설정을 E로 지정할 경우 엘리먼트는 -->
 <my-example></my-example>
 <!-- 형태로 작성해야 합니다. -->
 ```
+
 2. template : directive를 수행할 엘리먼트 내에 사용되어질 html(보통은) 내용입니다.
 3. templateUrl : 2번과 같은 목적의 html 내용을 특정 url 주소로 설정합니다.
 4. replace : 디렉티브를 사용한 HTML의 태그에 template 또는 templateUrl에 포함된 태그 내용을 추가할지 교체할지 설정
