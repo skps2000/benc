@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[Javascript] Closure"
+title:  "[Javascript] Closure란 무엇일까?"
 date:   2019-08-19 21:52:00
-categories: javascript closure functional
+categories: javascript closure 
 ---
 
 >  **클로져의 적당한 의미?**
