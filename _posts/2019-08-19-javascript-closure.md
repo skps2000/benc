@@ -6,9 +6,11 @@ categories: javascript closure functional
 ---
 
 >  **클로져의 적당한 의미?**
->> A closure gives you access to an outer function’s scope from an inner function. 
+>  
+> A closure gives you access to an outer function’s scope from an inner function. 
 In JavaScript, closures are created every time a function is created, at function creation time.
- (클로져는 내부 함수에서 외부 함수의 스코프에 접근할 수 있도록 허용하고, 자바스크립트 내에서의 클로져는 함수가 만들어질 때마다 매번 생성됩니다.)
+
+>  (클로져는 내부 함수에서 외부 함수의 스코프에 접근할 수 있도록 허용하고, 자바스크립트 내에서의 클로져는 함수가 만들어질 때마다 매번 생성됩니다.)
 
 
 항상 느끼지만 해외 레퍼런스를 참고하다 보면 상당히 추상적인 표현이 많다는걸 알게됩니다. 
@@ -31,9 +33,6 @@ console.log(closure()); // 'variable 1'
 -  리턴되어진 함수를 실행해 보면 fnClosure안의 지역변수의 값을 반환하고 있다.
 
 - 여기서 Javascript Closure에 대해 생각해 보자면 GC 대상이 되었어야 할 사용이 끝난 변수(text) 또는 컨텍스트에 대해 참조 경로(function)를 생성하고 반환함으로써 함수 내의 환경에 접근가능한 방법을 제공한다.
-
-아래에서 조금 더 살펴보자.
-
 
 ### 클로저를 통한 은닉화
 
