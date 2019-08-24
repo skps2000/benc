@@ -5,8 +5,6 @@ date:   2019-08-19 21:52:00
 categories: javascript closure functional
 ---
 
-### Closure
-
 >  **클로져의 적당한 의미?**
 >> A closure gives you access to an outer function’s scope from an inner function. 
 In JavaScript, closures are created every time a function is created, at function creation time.
