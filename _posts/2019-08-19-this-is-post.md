@@ -15,5 +15,5 @@ layout: post
 
 감사합니다.
 
-*** my github : https://github.com/skps2000 ***
-*** contact : skps2000@gmail.com ***
+> my github : https://github.com/skps2000 
+
