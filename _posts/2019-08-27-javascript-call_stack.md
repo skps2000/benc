@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Javascript] Closure란 무엇일까?"
+title:  "[Javascript] 자바스크립트 함수가 실행되었을 때 이루어지는 "
 date:   2019-08-27 21:38:00
 categories: javascript callstack heap queue 
 ---
