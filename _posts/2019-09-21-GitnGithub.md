@@ -10,7 +10,7 @@ categories: Git Github Gitlab 형상관리
  `
  
  ```js
- function start(){
+ function youAndMeTogether(){
   return ':)';
  }
  ```
