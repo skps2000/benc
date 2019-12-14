@@ -118,23 +118,58 @@ public class Counting {
 
 ### 메모리가 하는일
 
-### 다중 잠금장치
+다음 코드를 실행하게 되면 어떤 문제를 일으킬까요?
 
-### 외부 메서드
+```java
+package com.paulbutcher;
 
+// START:main
+public class Puzzle {
+  static boolean answerReady = false;
+  static int answer = 0;
+  
+  static Thread t1 = new Thread() {
+      public void run() {
+        answer = 42; //<label id="code.setanswer"/>
+        answerReady = true; //<label id="code.answerready"/>
+      }
+    };
+    
+  static Thread t2 = new Thread() {
+      public void run() {
+        if (answerReady)
+          System.out.println("The meaning of life is: " + answer);
+        else
+          System.out.println("I don't know the answer");
+      }
+    };
 
+  public static void main(String[] args) throws InterruptedException {
+    t1.start(); t2.start();
+    t1.join(); t2.join();
+  }
+}
+// END:main
+```
+결론부터 말하자면 위 코드를 실행할때마다 우리는 42값을 볼수도 있고 답을 모른다는 응답을 볼수도 있다. 심지어 다음과 같은 출력값을 얻을수도 있습니다.
 
+``
+The meaning of life is: 0
+``
+이해가 안되겠지만 이것은 분명히 일어날수 있는 일입니다. 다음과 같은 사실 때문이지요.
+1. 컴파일러는 코드 실행순서를 바꿀 수 있다.
+2. JVM 또한 코드 실행순서를 바꿀 수 있다.
+3. 코드를 실행하는 하드웨어도 코드의 순서를 바꿀 수 있다.
 
+이러한 이유들 때문에 우리는 Puzzle 클래스를 믿을 수 없게 됩니다. 하지만, 이렇게 이상한 출력값을 주는 코드를 짜기 전에 우리는 이를 방지할수 있는 어떤 규칙을 숙지하면 됩니다. 그것이 바로 다음과 같은 규칙들입니다.
 
+1. 공유되는 변수에 대한 접근을 반드시 동기화한다.
+2. 쓰는 스레드와 읽는 스레드가 모두 동기화 되어야 한다.
+3. 여러개의 잠금장치를 미리 정해진 공통의 순서에 따라 요청한다.
+4. 잠금장치를 가진 상태에서 외부 메서드를 호출하지 않는다.
+5. 잠금장치는 최대한 짧게 보유한다.
 
-
-
-
-
-
-
-
-
-
+### 결론
+쓰레드와 잠금장치에 대해 몇가지 예제를 가지고 분석해보았습니다. 조금 기본적일 수 있기 때문에 심화학습을 원하시는 분은 [자바 메모리모델](https://parkcheolu.tistory.com/14) 을 학습해보시면 좋을것 같습니다.
 
 
