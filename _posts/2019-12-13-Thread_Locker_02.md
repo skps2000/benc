@@ -7,7 +7,7 @@ categories: Thread Locker
 
 동시성 프로그래밍 2탄입니다. 1편을 보고 오지 않으신 경우 1편 먼저 보는것을 추천드립니다. 오늘은 쓰레드와 장금장치에 대한 부연설명과 메모리, 그리고 다중 잠금장치에 대해서 한번 포스팅 해보도록 하겠습니다. 제 나름대로 추상적인 개념들을 직관적으로 바꾸어 정리할 수 있도록 노력해보겠습니다. 
 
-### 메모리모델
+### 자바를 통한 스레드와 잠금장치의 이해
 동시성 프로그래밍에서 코드를 작성하다 보면 경쟁조건이나 데드락에 의해서 문제가 발생되는 경우가 흔합니다. 우리는 메모리에서 어떠한 문제를 일으키는지 코드와 함께 이해해 보도록 하겠습니다. 
 
 #### 스레드 만들기
@@ -22,26 +22,119 @@ public class HelloWorld {
   public static void main(String[] args) throws InterruptedException {
     Thread myThread = new Thread() {
         public void run() {
-          System.out.println("Hello from new thread");
+          System.out.println("A");
         }
       };
 	  
     myThread.start();
     Thread.yield();
-    System.out.println("Hello from main thread");
+    System.out.println("B");
     myThread.join();
   }
 }
 
 ```
 
+이 코드가 반환하는 값은 순서가 보장될수 없습니다. A가 먼저 출력될지 B가 먼저 출력될지는 타이밍에 따라 달라질수 있게 구성되어 있기 때문입니다. 이같은 스레드의 속성은 멀티스레딩 코드를 어렵게 만드는 부분입니다.
 
+#### 첫번째 잠금장치
+우리는 각자의 스레드가 엉키지 않도록 잠금장치를 사용할수 있습니다.
+
+```java
+package com.paulbutcher;
+
+// START:main
+public class Counting {
+  public static void main(String[] args) throws InterruptedException {
+	  
+    class Counter {
+      private int count = 0;
+      public void increment() { ++count; }
+      public int getCount() { return count; }
+    }
+    
+    final Counter counter = new Counter();
+    
+    class CountingThread extends Thread {
+      public void run() {
+        for(int x = 0; x < 10000; ++x)
+          counter.increment();
+      }
+    }
+
+    CountingThread t1 = new CountingThread();
+    CountingThread t2 = new CountingThread();
+    t1.start(); t2.start();
+    t1.join(); t2.join();
+    System.out.println(counter.getCount());
+  }
+}
+// END:main
+
+```
+
+t1과 t2 스레드가 하는 일은 같습니다. 이 두 스레드를 위 코드와 같이 호출할 경우 매번 다른 값을 가져올 것입니다. t1스레드와 t2스레드가 동일한 타이밍에 increment 메소드를 호출한다면 서로 같은 count값을 읽고 서로 같은 결과값을 반환할 것이기 떄문입니다. 그렇게 되면 count가 두번이 아니라 한번만 증가된것과 동일한 값이겠지요. 이런 상황에 대한 해법은 잠금장치를 이용하는 것입니다. count에 대한 접근을 동기화 시켜 한번에 하나의 스레드만 접근할 수 있도록 설정해두면 우리가 기대하는 반환값 20000이 반환될수 있을것입니다. 자바에서는 잠금장치를 syncronized 라는 잠금장치를 자체적으로 제공하고 있습니다. 코드를 수정하면 다음과 같습니다.
+
+```java
+package com.paulbutcher;
+
+// START:main
+public class Counting {
+
+  public static void main(String[] args) throws InterruptedException {
+    
+    // START:code.counter
+    class Counter {
+      private int count = 0;
+      // START_HIGHLIGHT
+      public synchronized void increment() { ++count; }
+      // END_HIGHLIGHT
+      public int getCount() { return count; }
+    }
+    // END:code.counter
+    final Counter counter = new Counter();
+    
+    class CountingThread extends Thread {
+      public void run() {
+        for(int x = 0; x < 10000; ++x)
+          counter.increment();
+      }
+    }
+
+    CountingThread t1 = new CountingThread();
+    CountingThread t2 = new CountingThread();
+    
+    t1.start(); t2.start();
+    t1.join(); t2.join();
+    
+    System.out.println(counter.getCount());
+  }
+}
+// END:main
+
+```
+
+이제 각 스레드가 increment 메소드를 호출하게 되면 잠금장치가 작동합니다. increment를 반환하면 자동으로 잠금장치도 해제됩니다. 그럼 각 스레드가 동일한 값의 count로 계산할 일도 없어집니다. 이렇게 하면 완변한 프로그램인듯 보입니다. 하지만 이 프로그램은 아직 메모리에 의해 발생되는 미묘한 버그를 가지고 있습니다.
 
 ### 메모리가 하는일
 
 ### 다중 잠금장치
 
 ### 외부 메서드
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
