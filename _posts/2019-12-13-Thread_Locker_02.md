@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[동시성] 쓰레드와 잠금장치(2/3)"
+title:  "[동시성] 쓰레드와 잠금장치(2/2)"
 date:   2019-12-13 12:38:00
 categories: Thread Locker
 ---
